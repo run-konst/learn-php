@@ -31,7 +31,7 @@
 
     $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel tempus erat. In sollicitudin nisl nisi, in cursus erat pulvinar et. In congue eleifend accumsan. Nam dictum nibh a justo iaculis, at hendrerit dui condimentum. Nulla et malesuada elit. Etiam eu dolor et nulla lobortis lacinia malesuada quis lacus. Aliquam nec nibh porta, vehicula justo id, sodales eros. Nulla facilisi. Nulla quis dui volutpat, mattis dolor massa ut, interdum nisl.';
 
-    $text = "<ol><li>{$text}</ol></li>";
+    $text = "<ol><li>{$text}</li></ol>";
     $text = str_replace('. ', '.</li><li>', $text);
     $text = str_replace('.', ';', $text);
     $text = str_replace('dolor', '<i>dolor</i>', $text);
