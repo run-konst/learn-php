@@ -27,6 +27,15 @@
     $mult = $y1 * $y2;
     echo $mult . '<br>';
 
+    // 2 задание альт
+
+    $a1 = $num % 100;
+    $a2 = $num / 100 % 100;
+    $a3 = floor($num / 10000);
+    var_dump($a1);
+    var_dump($a2);
+    var_dump($a3);
+
     // 3 задание
 
     $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel tempus erat. In sollicitudin nisl nisi, in cursus erat pulvinar et. In congue eleifend accumsan. Nam dictum nibh a justo iaculis, at hendrerit dui condimentum. Nulla et malesuada elit. Etiam eu dolor et nulla lobortis lacinia malesuada quis lacus. Aliquam nec nibh porta, vehicula justo id, sodales eros. Nulla facilisi. Nulla quis dui volutpat, mattis dolor massa ut, interdum nisl.';
