@@ -5,20 +5,16 @@
     // - остальные годы, номер которых кратен 4, — високосные.
     // - все остальные годы — не високосные.
 
-    $year = readline('Введите год от 0 до 2021: ');
-    if ($year === '0') {  //тут проверяем на введенный 0
-        echo 'Год високосный';
-    } elseif ($year <= 0 || $year > 2021) { //а тут получается что сравнение преобразовывает строку в числовой 0, если введено не число
-        echo 'Год введен неверно!';
-    } elseif ($year % 400 === 0) {
-        echo 'Год високосный';
-    } elseif ($year % 100 === 0) {
-        echo 'Год не високосный (/100)';
-    } elseif ($year % 4 === 0) {
-        echo 'Год високосный';
-    } else {        
-        echo 'Год не високосный';
-    }    
+    // $year = readline('Введите год от 0 до 2021: ');
+    // if ($year === '0') {  //тут проверяем на введенный 0
+    //     echo 'Год високосный';
+    // } elseif ($year <= 0 || $year > 2021) { //а тут получается что сравнение преобразовывает строку в числовой 0, если введено не число
+    //     echo 'Год введен неверно!';
+    // } elseif ($year % 400 === 0 || ($year % 4 === 0 && $year % 100 !== 0)) {
+    //     echo 'Год високосный';
+    // } else {
+    //     echo 'Год не високосный';
+    // }
 
     // 2. Получить от пользователя 3 значения: сторона A, сторона B и угол альфа.
 
@@ -37,20 +33,21 @@
     $is_rhomb = $a === $b && $A !== 90;
     //$is_parall = $a !== $b && $A !== 90;
 
+    $s = $a * $b;
+    $s2 = $s * sin(deg2rad($A));
+
     if ($error) {
         echo 'Ошибка ввода';
     } elseif ($is_square) {
-        $s = $a ** 2;
         echo "Это квадрат, площадь {$s}";
     } elseif ($is_quad) {
-        $s = $a * $b;
         echo "Это прямоугольник, площадь {$s}";
     } elseif ($is_rhomb) {
         $s = $a ** 2 * sin(deg2rad($A));
-        echo "Это ромб, площадь {$s}";
+        echo "Это ромб, площадь {$s2}";
     } else {
         $s = $a * $b * sin(deg2rad($A));
-        echo "Это параллелограмм, площадь {$s}";
+        echo "Это параллелограмм, площадь {$s2}";
     }
 
     // 3.
@@ -58,16 +55,16 @@
     // b) добавить класс btn-success к 1й ссылке, а ко 2й - btn-primary
     // c) заменить обе ссылки (href) на http://example.com/(файл) (имя файла оставить без изменений)
 
-    $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel tempus <a href="http://localhost/1.jpg" class="btn">erat</a>. In sollicitudin <span class="dotted">nisl nisi</span>, in cursus erat pulvinar et. In <a href="https://wikipedia.org/2.png" class="btn">congue</a> eleifend accumsan.';
+    // $text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel tempus <a href="http://localhost/1.jpg" class="btn">erat</a>. In sollicitudin <span class="dotted">nisl nisi</span>, in cursus erat pulvinar et. In <a href="https://wikipedia.org/2.png" class="btn">congue</a> eleifend accumsan.';
 
-    $text = str_replace('<a ', '<a target="_blank" ', $text);
-    $new_text = substr($text, 0, strpos($text, 'http'));
-    $new_text .= 'http://example.com/';
-    $new_text .= substr($text, strpos($text, '1.jpg'), strpos($text, '"btn"') - strpos($text, '1.jpg') + 4);
-    $new_text .= ' btn-success';
-    $new_text .= substr($text, strpos($text, '">erat'), strpos($text, 'https') - strpos($text, '">erat'));
-    $new_text .= 'http://example.com/';
-    $new_text .= substr($text, strpos($text, '2.png'), strpos($text, '"btn"', strpos($text, '2.png')) - strpos($text, '2.png') + 4);
-    $new_text .= ' btn-primary';
-    $new_text .= substr($text, strpos($text, '">congue'));
-    echo $new_text;
+    // $text = str_replace('<a ', '<a target="_blank" ', $text);
+    // $new_text = substr($text, 0, strpos($text, 'http'));
+    // $new_text .= 'http://example.com/';
+    // $new_text .= substr($text, strpos($text, '1.jpg'), strpos($text, '"btn"') - strpos($text, '1.jpg') + 4);
+    // $new_text .= ' btn-success';
+    // $new_text .= substr($text, strpos($text, '">erat'), strpos($text, 'https') - strpos($text, '">erat'));
+    // $new_text .= 'http://example.com/';
+    // $new_text .= substr($text, strpos($text, '2.png'), strpos($text, '"btn"', strpos($text, '2.png')) - strpos($text, '2.png') + 4);
+    // $new_text .= ' btn-primary';
+    // $new_text .= substr($text, strpos($text, '">congue'));
+    // echo $new_text;
