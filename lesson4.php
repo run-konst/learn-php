@@ -89,7 +89,7 @@
             foreach ($days_arr as $item) {
                 $html .= "<li>$item</li>";
             }
-            $html .= '</li></ol>';
+            $html .= '</ol></li>';
         }    
     $html .= '</ul>';
 
