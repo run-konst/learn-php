@@ -48,12 +48,13 @@
         return $word;
     }
 
-    echo get_word_form(rand(0, 500)) . "\n";
+    //echo get_word_form(rand(0, 500)) . "\n";
 
     // b) возвращает сумму прописью (без копеек), на вход принимает целое число от 1 до 999 999
 
     $hundreds = ['сто', 'двести', 'триста', 'четыреста', 'пятьсот', 'шестьсот', 'семьсот', 'восемьсот', 'девятьсот'];
     $dozens = ['десять', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто'];
+    $dozens11_19 = ['одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'];
     $units_thousand = ['одна', 'две', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'];
     $units_rub = ['один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'];
 
@@ -66,38 +67,44 @@
         }
     }
 
+    function num_to_words(string $num, array $hundreds, array $dozens, array $dozens11_19, array $units, array $word_form) {
+        $result = '';
+        if (!empty($num)) {
+            if (strlen($num) === 3) {
+                if (substr($num, -2) > 10 && substr($num, -2) < 20) {
+                    $result .= match_num($hundreds, $num) . match_num($dozens11_19, $num, 2);
+                } else{
+                    $result .= match_num($hundreds, $num) . match_num($dozens, $num, 1) . match_num($units, $num, 2);
+                }
+            } elseif (strlen($num) === 2) {
+                if (substr($num, -2) > 10 && substr($num, -2) < 20) {
+                    $result .= match_num($dozens11_19, $num, 1);
+                } else{
+                    $result .= match_num($dozens, $num) . match_num($units, $num, 1);
+                }                
+            } else {
+                $result .= match_num($units, $num);
+            }
+            $result .= get_word_form($num, $word_form, false) . ' ';
+            return $result;
+        }
+    }
+
     function sum_to_words(int $num) {
         global $hundreds;
         global $dozens;
+        global $dozens11_19;
         global $units_thousand;
         global $units_rub;
         $thousands = (string) floor($num / 1000);
         $units = substr($num, -3);
         $result = '';
-        if (!empty($thousands)) {
-            if (strlen($thousands) === 3) {
-                $result .= match_num($hundreds, $thousands) . match_num($dozens, $thousands, 1) . match_num($units_thousand, $thousands, 2);
-            } elseif (strlen($thousands) === 2) {
-                $result .= match_num($dozens, $thousands) . match_num($units_thousand, $thousands, 1);
-            } else {
-                $result .= match_num($units_thousand, $thousands);
-            }
-            $result .= get_word_form($thousands, ['тысяча', 'тысячи', 'тысяч'], false) . ' ';
-        }
-        if (!empty($units)) {
-            if (strlen($units) === 3) {
-                $result .= match_num($hundreds, $units) . match_num($dozens, $units, 1) . match_num($units_rub, $units, 2);
-            } elseif (strlen($units) === 2) {
-                $result .= match_num($dozens, $units) . match_num($units_rub, $thousands, 1);
-            } else {
-                $result .= match_num($units_rub, $units);
-            }
-            $result .= get_word_form($units, ['рубль', 'рубля', 'рублей'], false);
-        }
+        $result .= num_to_words($thousands, $hundreds, $dozens, $dozens11_19, $units_thousand, ['тысяча', 'тысячи', 'тысяч']);
+        $result .= num_to_words($units, $hundreds, $dozens, $dozens11_19, $units_rub, ['рубль', 'рубля', 'рублей']);
         return $result;
     }
 
-    echo sum_to_words(111050);
+    echo sum_to_words(rand(1, 999999));
 
     // 3. Написать функцию сортировки массива из строк по длине строк. За основу можно взять текст из домашнего задания к прошлому уроку или другой рыбу-текст (на латинице) и разбить его на слова. На вход должна принимать массив строк, возвращать его же, но отсортированный по возрастанию длины строки.
 
